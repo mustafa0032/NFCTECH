@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bestellung bestätigt – TapReview</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tapreview.css">
+</head>
+<body>
+<main class="tr-section" style="min-height:80vh;display:grid;place-items:center;text-align:center">
+  <div class="tr-container tr-narrow">
+    <div style="width:80px;height:80px;border-radius:50%;background:var(--tr-success);display:grid;place-items:center;color:#fff;font-size:2.4rem;margin:0 auto 1.5rem">✓</div>
+    <h1 class="tr-h1">Vielen Dank für deine Bestellung!</h1>
+    <p class="tr-lead" style="margin-top:1rem">Du erhältst gleich eine Bestätigung per E-Mail. Deine TapReview-Produkte sind in 2–4 Werktagen bei dir.</p>
+    <a href="/" class="tr-btn tr-btn--primary" style="margin-top:2rem">Zurück zur Startseite</a>
+  </div>
+</main>
+<script>
+  // Warenkorb nach erfolgreichem Kauf leeren
+  try { localStorage.removeItem('tapreview_cart'); } catch (e) {}
+</script>
+</body>
+</html>

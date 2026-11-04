@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Produkt – TapReview</title>
+<meta name="description" content="Entdecke die TapReview Reviewkarten und NFC-Sticker im Detail: Material, Technik, Lieferung und Preis. Mit einem Tap zu mehr Google-Bewertungen.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/tapreview.css">
+</head>
+<body>
+
+<nav class="tr-nav" data-nav>
+  <div class="tr-nav__inner">
+    <a href="/" class="tr-nav__brand">NFC-Tech</a>
+    <button class="tr-nav__toggle" data-nav-toggle aria-label="Menü" aria-expanded="false">☰</button>
+    <div class="tr-nav__links">
+      <a href="/#produkte">Produkte</a>
+      <a href="/so-funktioniert-nfc">So funktioniert NFC</a>
+      <a href="/business">Für Unternehmen</a>
+      <a href="/checkout" class="tr-btn tr-btn--primary" style="padding:.45rem 1rem">
+        Warenkorb <span data-cart-count class="tr-badge" style="background:var(--tr-text);color:#fff;display:none">0</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main id="product-root" class="tr-section">
+  <div class="tr-container"><p class="tr-lead">Produkt wird geladen…</p></div>
+</main>
+
+<footer class="tr-footer" style="padding-block:2.5rem">
+  <div class="tr-container">
+    <p>© <span data-year>2026</span> TapReview · <a href="/">Startseite</a> · <a href="/impressum">Impressum</a></p>
+  </div>
+</footer>
+
+<script src="js/products-data.js"></script>
+<script src="js/main.js"></script>
+<script>
+(async function () {
+  const id = new URLSearchParams(location.search).get('id') || 'karte-weiss';
+  const { products } = await TapReview.loadProducts();
+  const p = products.find(x => x.id === id) || products[0];
+  const root = document.getElementById('product-root');
+  if (!p) { root.innerHTML = '<div class="tr-container"><p>Produkt nicht gefunden.</p></div>'; return; }
+  document.title = `${p.name} – TapReview`;
+
+  const highlights = p.highlights.map(h => `<li style="display:flex;gap:.6rem;margin-bottom:.7rem">
+      <span style="color:var(--tr-success)">✓</span><span>${h}</span></li>`).join('');
+  const specs = Object.entries(p.specs).map(([k, v]) => `
+      <div style="display:flex;justify-content:space-between;padding:1rem 0;border-bottom:1px solid var(--tr-line-soft)">
+        <span style="color:var(--tr-text-2)">${k}</span><strong>${v}</strong></div>`).join('');
+
+  root.innerHTML = `
+  <div class="tr-container">
+    <a href="/#produkte" class="tr-link-arrow" style="font-size:.9rem">‹ Alle Produkte</a>
+
+    <!-- Apple-Style Split-Hero -->
+    <div class="grid gap-10" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));align-items:center;margin-top:1.5rem">
+      <div>
+        <div class="tr-stage" style="border-radius:var(--tr-radius-lg);border-bottom:0;aspect-ratio:1/1;padding:2rem">
+          <img id="galMain" src="${(p.images && p.images[0]) || p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain"
+               onerror="this.src='assets/placeholder.svg'">
+        </div>
+        ${(p.images && p.images.length > 1) ? `<div style="display:flex;gap:.6rem;margin-top:.75rem">
+          ${p.images.map((src, i) => `<button type="button" class="gal-thumb${i === 0 ? ' is-active' : ''}" data-src="${src}" aria-label="Ansicht ${i + 1}" style="flex:0 0 auto;width:72px;height:72px;border-radius:12px;border:1.5px solid var(--tr-line);background:#fff;padding:.35rem;cursor:pointer;overflow:hidden"><img src="${src}" alt="Ansicht ${i + 1}" style="width:100%;height:100%;object-fit:contain"></button>`).join('')}
+        </div>` : ''}
+      </div>
+      <div>
+        ${p.badge ? `<span class="tr-badge">${p.badge}</span>` : ''}
+        <h1 class="tr-h1" style="margin:.6rem 0 .5rem">${p.name}</h1>
+        <p class="tr-lead">${p.tagline}</p>
+        <div style="display:flex;align-items:center;gap:.5rem;margin:1rem 0">
+          <span class="tr-stars">★★★★★</span>
+          <span style="color:var(--tr-text-2);font-size:.9rem">${p.reviews} Bewertungen</span>
+        </div>
+        <p style="color:var(--tr-text-2);max-width:50ch">${p.short}</p>
+        <div style="margin:1.5rem 0 .5rem">
+          <p class="tr-eyebrow" style="margin-bottom:.6rem">Menge wählen</p>
+          <div id="bundleOpts" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.6rem;max-width:540px">
+            ${p.bundles.map((b, i) => `
+              <button type="button" class="bundle-opt${i === 0 ? ' is-active' : ''}" data-qty="${b.qty}" data-price="${b.price}">
+                <span style="font-weight:700;font-family:var(--tr-font-display)">${b.qty} Stück</span>
+                <span style="display:block;font-size:.82rem;color:var(--tr-text-2);margin-top:.15rem">${TapReview.CHF.format(b.price)}${b.qty > 1 ? ` · ${TapReview.CHF.format(b.price / b.qty)}/Stk.` : ''}</span>
+              </button>`).join('')}
+          </div>
+        </div>
+        <div id="bundleTotal" style="font-size:2rem;font-weight:700;font-family:var(--tr-font-display);margin:.6rem 0 .25rem">${TapReview.CHF.format(p.bundles[0].price)}</div>
+        <p style="color:var(--tr-text-2);font-size:.85rem;margin-bottom:1.5rem">inkl. MwSt. · Versand in der Schweiz</p>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:center">
+          <button id="addcart" class="tr-btn tr-btn--primary">In den Warenkorb</button>
+          <a href="/checkout" class="tr-btn tr-btn--ghost tr-link-arrow">Zur Kasse</a>
+        </div>
+        <p id="added" style="color:var(--tr-success);margin-top:1rem;opacity:0;transition:opacity .3s">✓ Zum Warenkorb hinzugefügt</p>
+      </div>
+    </div>
+
+    <!-- Highlights + Specs -->
+    <div class="grid gap-10 tr-section" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
+      <div>
+        <h2 class="tr-h3" style="margin-bottom:1rem">Highlights</h2>
+        <ul style="list-style:none;padding:0;margin:0">${highlights}</ul>
+      </div>
+      <div>
+        <h2 class="tr-h3" style="margin-bottom:.5rem">Technische Daten</h2>
+        ${specs}
+      </div>
+    </div>
+  </div>`;
+
+  // Galerie: Front / Side wechseln
+  const galMain = document.getElementById('galMain');
+  document.querySelectorAll('.gal-thumb').forEach(t => t.addEventListener('click', () => {
+    document.querySelectorAll('.gal-thumb').forEach(x => x.classList.remove('is-active'));
+    t.classList.add('is-active');
+    if (galMain) galMain.src = t.dataset.src;
+  }));
+
+  // Mengen-Set-Logik
+  let sel = p.bundles[0];
+  const opts = Array.from(document.querySelectorAll('.bundle-opt'));
+  const totalEl = document.getElementById('bundleTotal');
+  opts.forEach(btn => btn.addEventListener('click', () => {
+    opts.forEach(b => b.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    sel = { qty: +btn.dataset.qty, price: +btn.dataset.price };
+    totalEl.textContent = TapReview.CHF.format(sel.price);
+  }));
+  document.getElementById('addcart').onclick = () => {
+    TapReview.Cart.add(p.id, sel.qty, sel.price);
+    const a = document.getElementById('added');
+    a.textContent = sel.qty > 1 ? `✓ ${sel.qty}er-Set zum Warenkorb hinzugefügt` : '✓ Zum Warenkorb hinzugefügt';
+    a.style.opacity = 1; setTimeout(() => a.style.opacity = 0, 2400);
+  };
+})();
+</script>
+</body>
+</html>

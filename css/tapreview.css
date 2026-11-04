@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* =========================================================================
+   TapReview – Design-System
+   Lime-Commerce-Look · eigenständig, keine Marken Dritter
+   Palette aus der Referenz: Lime-Akzent, Mint, warmes Off-White, Ink.
+   ========================================================================= */
+
+:root {
+  /* ---- Farben ---- */
+  --tr-bg:            #fbfbf7;   /* Warmes Off-White (Standard-Hintergrund) */
+  --tr-bg-white:      #ffffff;   /* Reine weisse Flächen / Karten */
+  --tr-bg-soft:       #f0f2ea;   /* Sanfte, leicht grünliche Abschnitte */
+  --tr-bg-dark:       #16170f;   /* Dunkle Full-Width Sektionen (warmes Schwarz) */
+  --tr-bg-dark-2:     #22241a;
+
+  --tr-text:          #16170f;   /* Primärtext (warmes Schwarz) */
+  --tr-text-2:        #63665b;   /* Sekundärtext / Subtitel */
+  --tr-text-invert:   #f4f5ec;   /* Text auf dunklem Grund */
+  --tr-text-invert-2: #a7ab98;   /* Sekundär auf dunklem Grund */
+
+  --tr-accent:        #c4f135;   /* Lime – nur als Fläche mit dunkler Schrift */
+  --tr-accent-hover:  #b6e625;
+  --tr-accent-press:  #a9d81c;
+  --tr-green-deep:    #3f6212;   /* Lesbares Grün für Links/Akzente/Zahlen (AA) */
+  --tr-mint:          #cfe8d8;   /* Weiches Mint für Sekundär-Flächen */
+  --tr-star:          #f2b01e;   /* Bewertungs-Sterne */
+  --tr-success:       #3f9142;   /* Erfolg / Bestätigung */
+
+  --tr-line:          #e0e2d6;   /* Trennlinien / Border */
+  --tr-line-soft:     #eceee4;
+
+  /* ---- Typografie ---- */
+  --tr-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+             Helvetica, Arial, sans-serif;
+  --tr-font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+
+  /* Fluid-Type-Scale (clamp = mobile-first, skaliert mit Viewport) */
+  --tr-fs-display: clamp(2.75rem, 6vw + 1rem, 5.5rem);  /* Hero-Headlines  */
+  --tr-fs-h1:      clamp(2.25rem, 4vw + 1rem, 4rem);
+  --tr-fs-h2:      clamp(1.75rem, 2.5vw + 1rem, 3rem);
+  --tr-fs-h3:      clamp(1.3rem, 1.2vw + 1rem, 1.75rem);
+  --tr-fs-lead:    clamp(1.15rem, 0.6vw + 1rem, 1.5rem);  /* Untertitel    */
+  --tr-fs-body:    1.0625rem;
+  --tr-fs-small:   0.875rem;
+
+  --tr-weight-regular: 400;
+  --tr-weight-medium:  500;
+  --tr-weight-semi:    600;
+  --tr-weight-bold:    700;
+
+  /* ---- Spacing (8px-Raster) ---- */
+  --tr-space-section: clamp(4.5rem, 9vw, 9rem);  /* Vertikaler Sektions-Rhythmus */
+  --tr-maxw:          1180px;                     /* Inhaltsbreite              */
+  --tr-maxw-narrow:   720px;                      /* Lesetext-Breite            */
+  --tr-gutter:        clamp(1.25rem, 4vw, 2.5rem);
+
+  /* ---- Radius & Schatten ---- */
+  --tr-radius-sm:  12px;
+  --tr-radius:     18px;   /* Standard-Karten */
+  --tr-radius-lg:  28px;   /* Grosse Flächen */
+  --tr-radius-pill: 980px; /* Apple-typische Pill-Buttons */
+
+  --tr-shadow-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --tr-shadow:     0 8px 30px rgba(0,0,0,.08);
+  --tr-shadow-lg:  0 24px 60px rgba(0,0,0,.12);
+
+  /* ---- Motion ---- */
+  --tr-ease:    cubic-bezier(0.28, 0.11, 0.32, 1);  /* Apple-artiges Easing */
+  --tr-dur:     0.7s;
+}
+
+/* ---------- Basis ---------- */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  margin: 0;
+  font-family: var(--tr-font);
+  font-size: var(--tr-fs-body);
+  line-height: 1.5;
+  color: var(--tr-text);
+  background: var(--tr-bg);
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4 { font-family: var(--tr-font-display); line-height: 1.05; letter-spacing: -0.02em; margin: 0; }
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--tr-green-deep); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+::selection { background: var(--tr-accent); color: var(--tr-text); }
+:focus-visible { outline: 3px solid var(--tr-green-deep); outline-offset: 2px; border-radius: 4px; }
+
+/* ---------- Layout-Helfer ---------- */
+.tr-container { max-width: var(--tr-maxw); margin-inline: auto; padding-inline: var(--tr-gutter); }
+.tr-narrow    { max-width: var(--tr-maxw-narrow); margin-inline: auto; }
+.tr-section   { padding-block: var(--tr-space-section); }
+
+.tr-eyebrow {
+  font-family: var(--tr-font-display);
+  font-size: .78rem;
+  font-weight: var(--tr-weight-semi);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tr-green-deep);
+  margin: 0 0 .9rem;
+}
+
+.tr-display { font-family: var(--tr-font-display); font-size: var(--tr-fs-display); font-weight: 700; }
+.tr-h1 { font-family: var(--tr-font-display); font-size: var(--tr-fs-h1); font-weight: 700; }
+.tr-h2 { font-family: var(--tr-font-display); font-size: var(--tr-fs-h2); font-weight: 600; }
+.tr-h3 { font-family: var(--tr-font-display); font-size: var(--tr-fs-h3); font-weight: 600; }
+.tr-lead { font-size: var(--tr-fs-lead); color: var(--tr-text-2); font-weight: var(--tr-weight-regular); line-height: 1.5; }
+
+/* Solides Grün statt Gradient (Richtlinie: keine Gradient-Wörter) */
+.tr-gradient-text { color: var(--tr-green-deep); }
+
+/* Signatur-Wort: farbiger Akzent, ohne Hintergrund */
+.tr-mark { color: var(--tr-green-deep); }
+.tr-dark .tr-mark { color: var(--tr-accent); }
+
+/* ---------- Buttons (Apple-Pill-Style) ---------- */
+.tr-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  font-size: 1.0625rem; font-weight: var(--tr-weight-regular);
+  padding: .7rem 1.4rem; border-radius: var(--tr-radius-pill);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background-color .25s var(--tr-ease), color .25s var(--tr-ease),
+              transform .15s var(--tr-ease), opacity .25s;
+  text-decoration: none; line-height: 1;
+}
+.tr-btn:hover { text-decoration: none; }
+.tr-btn:active { transform: scale(0.97); }
+
+.tr-btn { font-family: var(--tr-font-display); font-weight: var(--tr-weight-semi); }
+.tr-btn--primary { background: var(--tr-accent); color: var(--tr-text); }
+.tr-btn--primary:hover { background: var(--tr-accent-hover); }
+
+.tr-btn--ghost { background: transparent; color: var(--tr-green-deep); border-color: var(--tr-line); }
+.tr-btn--ghost:hover { background: rgba(63,98,18,.07); }
+
+.tr-btn--dark { background: var(--tr-bg-dark); color: var(--tr-text-invert); }
+.tr-btn--dark:hover { background: #000; }
+
+.tr-btn--light { background: #fff; color: var(--tr-text); box-shadow: var(--tr-shadow-sm); }
+.tr-btn--light:hover { background: var(--tr-bg-soft); }
+
+.tr-link-arrow { font-weight: var(--tr-weight-regular); }
+.tr-link-arrow::after { content: " ›"; }
+
+/* ---------- Bild-Umschalter auf Produktkarte ---------- */
+.tr-img-next {
+  position: absolute; bottom: .7rem; right: .7rem; z-index: 3;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--tr-line); background: #fff; color: var(--tr-text);
+  display: grid; place-items: center; cursor: pointer; font-size: 1.05rem; line-height: 1;
+  box-shadow: var(--tr-shadow-sm);
+  transition: background .2s var(--tr-ease), transform .15s var(--tr-ease);
+}
+.tr-img-next:hover { background: var(--tr-accent); transform: scale(1.08); }
+
+/* ---------- Produkt-Galerie (Thumbnails) ---------- */
+.gal-thumb { transition: border-color .2s var(--tr-ease); }
+.gal-thumb:hover { border-color: var(--tr-green-deep); }
+.gal-thumb.is-active { border-color: var(--tr-green-deep); box-shadow: inset 0 0 0 1px var(--tr-green-deep); }
+
+/* ---------- Mengen-Set-Auswahl (Produktseite) ---------- */
+.bundle-opt {
+  text-align: left; cursor: pointer; padding: .7rem .9rem; line-height: 1.25;
+  border: 1.5px solid var(--tr-line); border-radius: var(--tr-radius-sm);
+  background: #fff; color: var(--tr-text);
+  transition: border-color .2s var(--tr-ease), background .2s var(--tr-ease);
+}
+.bundle-opt:hover { border-color: var(--tr-green-deep); }
+.bundle-opt.is-active {
+  border-color: var(--tr-green-deep);
+  background: #f2f7e6;
+  box-shadow: inset 0 0 0 1px var(--tr-green-deep);
+}
+
+/* ---------- Navigation ---------- */
+.tr-nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(251,251,247,.8);
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
+  border-bottom: 1px solid var(--tr-line-soft);
+}
+.tr-nav__inner {
+  max-width: var(--tr-maxw); margin-inline: auto;
+  height: 52px; padding-inline: var(--tr-gutter);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.tr-nav__brand { font-family: var(--tr-font-display); font-weight: 700; font-size: 1.2rem; color: var(--tr-text); letter-spacing: -.02em; }
+.tr-nav__brand:hover { text-decoration: none; }
+.tr-nav__links { display: flex; gap: 2rem; align-items: center; }
+.tr-nav__links a { color: var(--tr-text); font-size: .9rem; opacity: .85; }
+.tr-nav__links a:hover { opacity: 1; text-decoration: none; }
+.tr-nav__toggle { display: none; background: none; border: 0; font-size: 1.5rem; cursor: pointer; color: var(--tr-text); }
+
+@media (max-width: 830px) {
+  .tr-nav__links {
+    position: absolute; inset: 52px 0 auto 0;
+    flex-direction: column; gap: 0; padding: .5rem var(--tr-gutter) 1.5rem;
+    background: rgba(251,251,247,.98); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--tr-line-soft);
+    transform: translateY(-12px); opacity: 0; pointer-events: none;
+    transition: opacity .25s var(--tr-ease), transform .25s var(--tr-ease);
+  }
+  .tr-nav__links a { width: 100%; padding: .9rem 0; border-bottom: 1px solid var(--tr-line-soft); font-size: 1.1rem; }
+  .tr-nav.is-open .tr-nav__links { opacity: 1; transform: none; pointer-events: auto; }
+  .tr-nav__toggle { display: block; }
+}
+
+/* ---------- Karten ---------- */
+.tr-card {
+  background: var(--tr-bg-white);
+  border-radius: var(--tr-radius);
+  box-shadow: var(--tr-shadow-sm);
+  overflow: hidden;
+  transition: transform .35s var(--tr-ease), box-shadow .35s var(--tr-ease);
+}
+.tr-card:hover { transform: translateY(-6px); box-shadow: var(--tr-shadow); }
+
+.tr-product-grid {
+  display: grid; gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+}
+
+/* Produktbild-Bühne: quadratisch, Bild vollständig sichtbar (contain, nie beschnitten) */
+.tr-stage {
+  position: relative;
+  display: grid; place-items: center;
+  aspect-ratio: 1 / 1;
+  background: #ffffff;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--tr-line-soft);
+}
+.tr-stage img { width: 100%; height: 100%; object-fit: contain; }
+
+/* ---------- Sterne ---------- */
+.tr-stars { color: var(--tr-star); letter-spacing: 2px; font-size: 1.1rem; }
+
+/* ---------- Tag / Badge ---------- */
+.tr-badge {
+  display: inline-block; font-family: var(--tr-font-display);
+  font-size: .72rem; font-weight: var(--tr-weight-semi);
+  letter-spacing: .03em;
+  padding: .28rem .65rem; border-radius: var(--tr-radius-pill);
+  background: var(--tr-mint); color: #22400f;
+}
+
+/* ---------- Scroll-Reveal-Animationen ---------- */
+.tr-reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity var(--tr-dur) var(--tr-ease), transform var(--tr-dur) var(--tr-ease);
+  will-change: opacity, transform;
+}
+.tr-reveal.is-visible { opacity: 1; transform: none; }
+.tr-reveal[data-delay="1"] { transition-delay: .08s; }
+.tr-reveal[data-delay="2"] { transition-delay: .16s; }
+.tr-reveal[data-delay="3"] { transition-delay: .24s; }
+.tr-reveal[data-delay="4"] { transition-delay: .32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tr-reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- Dunkle Sektion ---------- */
+.tr-dark { background: var(--tr-bg-dark); color: var(--tr-text-invert); }
+.tr-dark .tr-lead { color: var(--tr-text-invert-2); }
+.tr-dark .tr-eyebrow { color: var(--tr-accent); }
+.tr-dark .tr-mark { background: var(--tr-accent); color: var(--tr-bg-dark); }
+
+/* ---------- Footer ---------- */
+.tr-footer { background: var(--tr-bg-soft); color: var(--tr-text-2); font-size: var(--tr-fs-small); }
+.tr-footer a { color: var(--tr-text-2); }
+.tr-footer a:hover { color: var(--tr-text); }
+.tr-footer__cols { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.tr-footer__cols h4 { font-size: .8rem; color: var(--tr-text); margin-bottom: .75rem; }
+.tr-footer__cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+
+/* ---------- Phone-Mockup (NFC / Tap-Demo) ---------- */
+.tr-phone {
+  width: min(260px, 68vw); aspect-ratio: 9 / 19.5; background: #1d1d1f;
+  border-radius: 42px; padding: 11px; box-shadow: var(--tr-shadow-lg);
+  position: relative;
+}
+.tr-phone__screen {
+  width: 100%; height: 100%; background: #fff; border-radius: 32px;
+  overflow: hidden; position: relative; display: flex; flex-direction: column;
+}
+.tr-phone__notch {
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  width: 110px; height: 26px; background: #1d1d1f; border-radius: 14px; z-index: 3;
+}
+
+/* Tap-Wellen-Animation */
+.tr-tap-waves { position: relative; width: 120px; height: 120px; }
+.tr-tap-waves span {
+  position: absolute; inset: 0; margin: auto; border: 2px solid var(--tr-accent);
+  border-radius: 50%; opacity: 0; animation: tr-wave 2.4s var(--tr-ease) infinite;
+}
+.tr-tap-waves span:nth-child(2) { animation-delay: .8s; }
+.tr-tap-waves span:nth-child(3) { animation-delay: 1.6s; }
+@keyframes tr-wave {
+  0%   { transform: scale(.3); opacity: .8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Floating-Animation für Produktbild */
+.tr-float { animation: tr-float 6s ease-in-out infinite; }
+@keyframes tr-float { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-12px);} }
+
+@media (prefers-reduced-motion: reduce) {
+  .tr-float, .tr-tap-waves span { animation: none; }
+}
+
+/* ---------- Interaktive Tap-Demo ---------- */
+.demo-card { cursor: pointer; transition: transform .5s var(--tr-ease); }
+.demo-card.tapped { transform: translateX(60px) rotate(6deg) scale(.96); }
+.screen-state {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity .4s var(--tr-ease), transform .4s var(--tr-ease);
+  pointer-events: none;
+}
+.screen-state.active { opacity: 1; transform: none; pointer-events: auto; }
+.demo-star { font-size: 2rem; color: #d2d2d7; cursor: pointer; transition: color .15s, transform .15s; }
+.tr-phone .demo-star { font-size: 1.45rem; }   /* im kleinen Demo-Handy kleinere Sterne */
+.demo-star.lit { color: var(--tr-star); transform: scale(1.12); }
+
+/* Demo-Bühne: Karte + Handy. Bewegungsrichtung per CSS-Variablen (responsive). */
+.demo-stage {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  gap: clamp(1rem, 4vw, 3rem); flex-wrap: wrap;
+  --tap-x: -100px;   /* Desktop: Handy steht rechts, fährt nach links zur Karte */
+  --tap-y: 0px;
+  --tap-rot: -90deg; /* Handy neigt sich bis 90°, wenn es den Schild berührt */
+}
+.demo-cardwrap { position: relative; flex: 0 0 auto; }
+/* Schild in Originalgrösse (keine Skalierung) */
+.demo-cardwrap .tr-tap-waves {
+  position: absolute; top: 50%; right: -14px; transform: translateY(-50%);
+  width: 96px; height: 96px; opacity: 0; transition: opacity .3s var(--tr-ease);
+  pointer-events: none; z-index: 3;
+}
+.demo-cardwrap.contact .tr-tap-waves { opacity: 1; }
+
+.demo-phone-shell { position: relative; z-index: 2; }
+.demo-phone-shell .tr-phone { width: min(178px, 46vw); }   /* Handy kleiner → Schild wirkt grösser */
+
+/* Handy fährt zur Karte, neigt sich auf 90°, danach zurück */
+@keyframes tr-tap-move {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50%  { transform: translate(var(--tap-x), var(--tap-y)) scale(.6) rotate(var(--tap-rot)); }
+  100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+.tr-phone.is-tapping {
+  animation: tr-tap-move 2.2s ease-in-out both;
+  transform-origin: center; will-change: transform; backface-visibility: hidden;
+}
+
+/* Mobile: Karte und Handy bleiben nebeneinander (kein Umbruch) */
+@media (max-width: 640px) {
+  .demo-stage { flex-wrap: nowrap; gap: .5rem; --tap-x: -34px; --tap-y: 0px; --tap-rot: -90deg; }
+  .demo-cardwrap img { max-width: 44vw !important; }
+  .demo-phone-shell .tr-phone { width: 41vw; }
+  .demo-cardwrap .tr-tap-waves { width: 64px; height: 64px; right: -8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tr-phone.is-tapping { animation: none; }
+}

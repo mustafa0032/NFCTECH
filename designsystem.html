@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design-System – TapReview Styleguide</title>
+<meta name="description" content="Das TapReview Design-System: Farben, Typografie, Spacing, Buttons, Karten und Animationen – die visuelle Sprache der Website.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/tapreview.css">
+<style>.swatch{height:88px;border-radius:14px;border:1px solid var(--tr-line-soft)}.tok{font-family:ui-monospace,Menlo,monospace;font-size:.78rem;color:var(--tr-text-2)}</style>
+</head>
+<body>
+
+<nav class="tr-nav" data-nav>
+  <div class="tr-nav__inner">
+    <a href="/" class="tr-nav__brand">NFC-Tech</a>
+    <button class="tr-nav__toggle" data-nav-toggle aria-label="Menü" aria-expanded="false">☰</button>
+    <div class="tr-nav__links">
+      <a href="/#produkte">Produkte</a>
+      <a href="/so-funktioniert-nfc">So funktioniert NFC</a>
+      <a href="/business">Für Unternehmen</a>
+    </div>
+  </div>
+</nav>
+
+<header class="tr-section" style="padding-bottom:1rem">
+  <div class="tr-container">
+    <p class="tr-eyebrow">Styleguide</p>
+    <h1 class="tr-display" style="max-width:14ch">Das Design-System</h1>
+    <p class="tr-lead tr-narrow" style="margin-top:1rem;margin-left:0">Die visuelle Sprache von TapReview – als Referenz für Entwicklung und Gestaltung.</p>
+  </div>
+</header>
+
+<!-- Farben -->
+<section class="tr-section" style="padding-block:2rem">
+  <div class="tr-container">
+    <h2 class="tr-h2" style="margin-bottom:1.5rem">Farben</h2>
+    <div class="grid gap-4" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+      <div><div class="swatch" style="background:#fbfbf7"></div><p class="tok">--tr-bg<br>#fbfbf7</p></div>
+      <div><div class="swatch" style="background:#f0f2ea"></div><p class="tok">--tr-bg-soft<br>#f0f2ea</p></div>
+      <div><div class="swatch" style="background:#16170f"></div><p class="tok">--tr-text<br>#16170f</p></div>
+      <div><div class="swatch" style="background:#63665b"></div><p class="tok">--tr-text-2<br>#63665b</p></div>
+      <div><div class="swatch" style="background:#c4f135"></div><p class="tok">--tr-accent (Lime)<br>#c4f135</p></div>
+      <div><div class="swatch" style="background:#3f6212"></div><p class="tok">--tr-green-deep<br>#3f6212</p></div>
+      <div><div class="swatch" style="background:#cfe8d8"></div><p class="tok">--tr-mint<br>#cfe8d8</p></div>
+      <div><div class="swatch" style="background:#f2b01e"></div><p class="tok">--tr-star<br>#f2b01e</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Typografie -->
+<section class="tr-section" style="padding-block:2rem">
+  <div class="tr-container">
+    <h2 class="tr-h2" style="margin-bottom:1.5rem">Typografie <span class="tok">· Space Grotesk (Display) + Inter (Text)</span></h2>
+    <div style="display:grid;gap:1rem">
+      <div><span class="tr-display">Display</span> <span class="tok">--tr-fs-display · 600</span></div>
+      <div><span class="tr-h1">Headline 1</span> <span class="tok">--tr-fs-h1 · 600</span></div>
+      <div><span class="tr-h2">Headline 2</span> <span class="tok">--tr-fs-h2 · 600</span></div>
+      <div><span class="tr-h3">Headline 3</span> <span class="tok">--tr-fs-h3 · 600</span></div>
+      <div><span class="tr-lead">Lead / Untertitel</span> <span class="tok">--tr-fs-lead · 400</span></div>
+      <div><span style="font-size:var(--tr-fs-body)">Fliesstext – 1.0625rem</span> <span class="tok">--tr-fs-body</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Buttons -->
+<section class="tr-section" style="padding-block:2rem">
+  <div class="tr-container">
+    <h2 class="tr-h2" style="margin-bottom:1.5rem">Buttons</h2>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center">
+      <button class="tr-btn tr-btn--primary">Primary</button>
+      <button class="tr-btn tr-btn--ghost">Ghost</button>
+      <button class="tr-btn tr-btn--dark">Dark</button>
+      <button class="tr-btn tr-btn--light">Light</button>
+      <a class="tr-btn tr-btn--ghost tr-link-arrow">Text-Link</a>
+    </div>
+    <p class="tok" style="margin-top:1rem">Pill-Form · border-radius: var(--tr-radius-pill) · scale(0.97) beim Klick</p>
+  </div>
+</section>
+
+<!-- Karten & Radius -->
+<section class="tr-section" style="padding-block:2rem">
+  <div class="tr-container">
+    <h2 class="tr-h2" style="margin-bottom:1.5rem">Karten, Radius &amp; Schatten</h2>
+    <div class="grid gap-6" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+      <div class="tr-card" style="padding:1.5rem"><strong>tr-card</strong><p class="tok">radius 18px · shadow-sm → shadow (hover)</p></div>
+      <div style="background:#fff;border-radius:12px;box-shadow:var(--tr-shadow-sm);padding:1.5rem"><strong>radius-sm</strong><p class="tok">12px</p></div>
+      <div style="background:#fff;border-radius:28px;box-shadow:var(--tr-shadow);padding:1.5rem"><strong>radius-lg</strong><p class="tok">28px · shadow</p></div>
+      <div style="background:#fff;border-radius:18px;box-shadow:var(--tr-shadow-lg);padding:1.5rem"><strong>shadow-lg</strong><p class="tok">0 24px 60px /.12</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Spacing & Motion -->
+<section class="tr-section" style="padding-block:2rem 5rem">
+  <div class="tr-container">
+    <h2 class="tr-h2" style="margin-bottom:1.5rem">Spacing &amp; Motion</h2>
+    <div class="grid gap-6" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
+      <div class="tr-card" style="padding:1.5rem"><strong>Sektions-Rhythmus</strong><p class="tok">--tr-space-section: clamp(4.5rem, 9vw, 9rem)</p><p style="color:var(--tr-text-2)">Grosszügiger Weissraum zwischen Sektionen.</p></div>
+      <div class="tr-card" style="padding:1.5rem"><strong>Inhaltsbreite</strong><p class="tok">--tr-maxw: 1180px · --tr-maxw-narrow: 720px</p></div>
+      <div class="tr-card" style="padding:1.5rem"><strong>Easing &amp; Reveal</strong><p class="tok">cubic-bezier(0.28,0.11,0.32,1) · 0.7s</p><p style="color:var(--tr-text-2)">Fade-In + 28px Translate beim Scrollen.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="tr-footer" style="padding-block:2.5rem">
+  <div class="tr-container"><p>© <span data-year>2026</span> TapReview · <a href="/">Startseite</a> · <a href="/impressum">Impressum</a></p></div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

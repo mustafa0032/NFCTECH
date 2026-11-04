@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Warenkorb &amp; Kasse – TapReview</title>
+<meta name="description" content="Dein Warenkorb bei TapReview. Sicher bezahlen mit Stripe – Kreditkarte, TWINT und mehr.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/tapreview.css">
+</head>
+<body>
+
+<nav class="tr-nav" data-nav>
+  <div class="tr-nav__inner">
+    <a href="/" class="tr-nav__brand">NFC-Tech</a>
+    <button class="tr-nav__toggle" data-nav-toggle aria-label="Menü" aria-expanded="false">☰</button>
+    <div class="tr-nav__links">
+      <a href="/#produkte">Produkte</a>
+      <a href="/so-funktioniert-nfc">So funktioniert NFC</a>
+      <a href="/business">Für Unternehmen</a>
+    </div>
+  </div>
+</nav>
+
+<main class="tr-section">
+  <div class="tr-container">
+    <h1 class="tr-h1" style="margin-bottom:2rem">Warenkorb</h1>
+    <div class="grid gap-10" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start" id="layout">
+
+      <!-- Positionen -->
+      <div>
+        <div id="cartItems"></div>
+
+        <!-- Angaben zum Programmieren der Karten -->
+        <div id="progForm" class="tr-card" style="padding:1.5rem;margin-top:1.25rem">
+          <h2 class="tr-h3" style="margin-bottom:.35rem">Angaben zum Programmieren</h2>
+          <p style="color:var(--tr-text-2);font-size:.9rem;margin:0 0 1.1rem">Damit wir deine Karten mit dem richtigen Ziel vorprogrammieren können.</p>
+
+          <div style="margin-bottom:1rem">
+            <span style="display:block;font-size:.85rem;font-weight:600;margin-bottom:.4rem">Google-Bewertungslink(s) <span style="color:#b91c1c">*</span></span>
+            <div id="linksWrap" style="display:grid;gap:.5rem"></div>
+            <button type="button" id="addLink" class="tr-btn tr-btn--ghost" style="margin-top:.6rem;padding:.45rem .9rem;font-size:.85rem">+ Weiteren Link hinzufügen</button>
+            <span style="display:block;color:var(--tr-text-2);font-size:.78rem;margin-top:.5rem">Zu finden im Google-Unternehmensprofil unter „Rezensionen → Mehr Rezensionen erhalten". Für mehrere Standorte einfach weitere Links hinzufügen.</span>
+          </div>
+
+          <label style="display:block;margin-bottom:1rem">
+            <span style="display:block;font-size:.85rem;font-weight:600;margin-bottom:.35rem">Betriebsname</span>
+            <input id="fBusiness" type="text" placeholder="z. B. Café Bellavista"
+              style="width:100%;padding:.7rem .8rem;border:1px solid var(--tr-line);border-radius:12px;font:inherit;box-sizing:border-box">
+          </label>
+
+          <label style="display:block">
+            <span style="display:block;font-size:.85rem;font-weight:600;margin-bottom:.35rem">Sonstige Mitteilungen</span>
+            <textarea id="fNote" rows="3" placeholder="Optional: Wünsche, Fragen, mehrere Links …"
+              style="width:100%;padding:.7rem .8rem;border:1px solid var(--tr-line);border-radius:12px;font:inherit;resize:vertical;box-sizing:border-box"></textarea>
+          </label>
+        </div>
+      </div>
+
+      <!-- Zusammenfassung -->
+      <aside class="tr-card" style="padding:1.75rem;position:sticky;top:72px">
+        <h2 class="tr-h3" style="margin-bottom:1rem">Zusammenfassung</h2>
+        <div style="display:flex;justify-content:space-between;margin-bottom:.6rem"><span style="color:var(--tr-text-2)">Zwischensumme</span><strong id="subtotal">CHF 0.00</strong></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:.6rem"><span style="color:var(--tr-text-2)">Versand</span><span id="shipping">CHF 0.00</span></div>
+        <hr style="border:0;border-top:1px solid var(--tr-line-soft);margin:1rem 0">
+        <div style="display:flex;justify-content:space-between;font-size:1.2rem;margin-bottom:1.25rem"><strong>Total</strong><strong id="total">CHF 0.00</strong></div>
+        <button id="payBtn" class="tr-btn tr-btn--primary" style="width:100%">Sicher bezahlen</button>
+        <p style="text-align:center;color:var(--tr-text-2);font-size:.78rem;margin-top:.9rem">🔒 Bezahlung über Stripe · Kreditkarte, TWINT &amp; mehr</p>
+        <p id="payNote" style="font-size:.78rem;color:var(--tr-text-2);margin-top:.75rem"></p>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer class="tr-footer" style="padding-block:2.5rem">
+  <div class="tr-container"><p>© <span data-year>2026</span> TapReview · <a href="/">Weiter einkaufen</a></p></div>
+</footer>
+
+<script src="js/products-data.js"></script>
+<script src="js/main.js"></script>
+<script>
+// Backend-Endpunkt (siehe stripe/server.js). Leer lassen = Demo-Modus ohne echtes Backend.
+const CHECKOUT_API = 'https://nfctech.ch/api/create-checkout-session';
+const SHIP_SINGLE = 3.50;   // Versand für 1 Stück; ab 2 Stück gratis
+
+(async function () {
+  const { products } = await TapReview.loadProducts();
+  const byId = Object.fromEntries(products.map(p => [p.id, p]));
+  const itemsEl = document.getElementById('cartItems');
+
+  function render() {
+    const cart = TapReview.Cart.get();
+    if (!cart.length) {
+      itemsEl.innerHTML = `<div class="tr-card" style="padding:2.5rem;text-align:center">
+        <p class="tr-lead">Dein Warenkorb ist leer.</p>
+        <a href="/#produkte" class="tr-btn tr-btn--primary" style="margin-top:1rem">Produkte ansehen</a></div>`;
+      document.getElementById('payBtn').disabled = true;
+      document.getElementById('payBtn').style.opacity = .5;
+      update(0);
+      return;
+    }
+    itemsEl.innerHTML = cart.map(it => {
+      const p = byId[it.id]; if (!p) return '';
+      const key = TapReview.Cart.lineKey(it.id, it.packQty);
+      const setLabel = it.packQty > 1 ? `${it.packQty}er-Set` : 'Einzeln';
+      return `<div class="tr-card" style="padding:1.25rem;margin-bottom:1rem;display:flex;gap:1.25rem;align-items:center">
+        <div class="tr-stage" style="width:96px;height:96px;flex:none;border-radius:14px;border-bottom:0;padding:.5rem;aspect-ratio:auto">
+          <img src="${p.image}" alt="${p.name}" onerror="this.src='assets/placeholder.svg'"></div>
+        <div style="flex:1">
+          <strong>${p.name}</strong>
+          <p style="color:var(--tr-text-2);font-size:.85rem;margin:.2rem 0 .6rem">${setLabel} · ${TapReview.CHF.format(it.packPrice)}${it.packQty > 1 ? ` (${it.packQty} Stück)` : ''}</p>
+          <div style="display:inline-flex;align-items:center;border:1px solid var(--tr-line);border-radius:980px">
+            <button class="tr-btn" data-dec="${key}" style="padding:.35rem .75rem;border-radius:0">−</button>
+            <span style="min-width:2rem;text-align:center">${it.count}</span>
+            <button class="tr-btn" data-inc="${key}" data-id="${it.id}" data-q="${it.packQty}" data-p="${it.packPrice}" style="padding:.35rem .75rem;border-radius:0">+</button>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <strong>${TapReview.CHF.format(it.packPrice * it.count)}</strong><br>
+          <button class="tr-btn tr-btn--ghost" data-del="${key}" style="padding:.2rem .5rem;font-size:.8rem">Entfernen</button>
+        </div>
+      </div>`;
+    }).join('');
+
+    update(TapReview.Cart.subtotal());
+
+    itemsEl.querySelectorAll('[data-inc]').forEach(b => b.onclick = () => {
+      TapReview.Cart.add(b.dataset.id, +b.dataset.q, +b.dataset.p, 1); render();
+    });
+    itemsEl.querySelectorAll('[data-dec]').forEach(b => b.onclick = () => {
+      const key = b.dataset.dec;
+      const it = TapReview.Cart.get().find(i => TapReview.Cart.lineKey(i.id, i.packQty) === key);
+      if (it && it.count > 1) TapReview.Cart.setCount(key, it.count - 1); else TapReview.Cart.remove(key);
+      render();
+    });
+    itemsEl.querySelectorAll('[data-del]').forEach(b => b.onclick = () => { TapReview.Cart.remove(b.dataset.del); render(); });
+  }
+
+  function update(subtotal) {
+    const pieces = TapReview.Cart.pieces();
+    const shipping = pieces === 1 ? SHIP_SINGLE : 0;   // ab 2 Stück gratis
+    document.getElementById('subtotal').textContent = TapReview.CHF.format(subtotal);
+    const shipEl = document.getElementById('shipping');
+    if (pieces >= 2) { shipEl.textContent = 'Gratis'; shipEl.style.color = 'var(--tr-green-deep)'; }
+    else { shipEl.textContent = TapReview.CHF.format(shipping); shipEl.style.color = ''; }
+    document.getElementById('total').textContent = TapReview.CHF.format(subtotal + shipping);
+  }
+
+  render();
+
+  // ----- Mehrere Google-Links (hinzufügen / entfernen) -----
+  const linksWrap = document.getElementById('linksWrap');
+  function updateRemoveBtns() {
+    const only = linksWrap.children.length === 1;
+    linksWrap.querySelectorAll('.link-remove').forEach(b => b.style.visibility = only ? 'hidden' : 'visible');
+  }
+  function addLinkRow(val) {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;gap:.5rem;align-items:center';
+    const input = document.createElement('input');
+    input.type = 'url'; input.className = 'link-input';
+    input.placeholder = 'https://g.page/r/…/review';
+    input.value = val || '';
+    input.style.cssText = 'flex:1;padding:.7rem .8rem;border:1px solid var(--tr-line);border-radius:12px;font:inherit;box-sizing:border-box';
+    const rm = document.createElement('button');
+    rm.type = 'button'; rm.className = 'link-remove'; rm.setAttribute('aria-label', 'Link entfernen');
+    rm.textContent = '✕';
+    rm.style.cssText = 'flex:0 0 auto;width:42px;height:42px;border-radius:10px;border:1px solid var(--tr-line);background:#fff;cursor:pointer;font-size:1rem;line-height:1';
+    rm.addEventListener('click', () => {
+      if (linksWrap.children.length > 1) row.remove(); else input.value = '';
+      updateRemoveBtns();
+    });
+    row.appendChild(input); row.appendChild(rm);
+    linksWrap.appendChild(row);
+    updateRemoveBtns();
+  }
+  addLinkRow('');
+  document.getElementById('addLink').addEventListener('click', () => addLinkRow(''));
+
+  // Checkout starten
+  document.getElementById('payBtn').addEventListener('click', async () => {
+    const cart = TapReview.Cart.get();
+    if (!cart.length) return;
+    const note = document.getElementById('payNote');
+
+    // Programmier-Angaben einlesen + mindestens einen Google-Link prüfen
+    const links = Array.from(document.querySelectorAll('.link-input')).map(i => i.value.trim()).filter(Boolean);
+    const business = document.getElementById('fBusiness').value.trim();
+    const message = document.getElementById('fNote').value.trim();
+    if (!links.length) {
+      note.textContent = 'Bitte gib mindestens einen Google-Bewertungslink an, damit wir die Karten programmieren können.';
+      const first = document.querySelector('.link-input');
+      if (first) { first.focus(); first.style.borderColor = '#b91c1c'; }
+      document.getElementById('progForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    document.querySelectorAll('.link-input').forEach(i => i.style.borderColor = '');
+    const customer = { links, business, message };
+
+    if (!CHECKOUT_API) {
+      note.innerHTML = '✓ Angaben erfasst (' + links.length + ' Link' + (links.length > 1 ? 's' : '') + ').<br>⚙️ Demo-Modus: Trage in <code>/checkout</code> deine <code>CHECKOUT_API</code>-URL ein und starte <code>stripe/server.js</code>, um echte Zahlungen zu testen.';
+      return;
+    }
+    note.textContent = 'Weiterleitung zu Stripe…';
+    try {
+      const res = await fetch(CHECKOUT_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart, customer })   // items:[{id,packQty,packPrice,count}], customer:{links:[],business,message}
+      });
+      const data = await res.json();
+      if (data.url) location.href = data.url;     // Stripe Checkout
+      else throw new Error(data.error || 'Unbekannter Fehler');
+    } catch (e) {
+      note.textContent = 'Fehler beim Checkout: ' + e.message;
+    }
+  });
+})();
+</script>
+</body>
+</html>

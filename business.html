@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Für Unternehmen – Reviewkarten in Menge mit eigenem Branding | TapReview</title>
+<meta name="description" content="TapReview für Händler und Ketten: individuelles Logo, Mengenrabatte ab 25 Stück, Filial-Dashboard und Rechnung auf Firma. Mehr Bewertungen für alle Standorte.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/tapreview.css">
+</head>
+<body>
+
+<nav class="tr-nav" data-nav>
+  <div class="tr-nav__inner">
+    <a href="/" class="tr-nav__brand">NFC-Tech</a>
+    <button class="tr-nav__toggle" data-nav-toggle aria-label="Menü" aria-expanded="false">☰</button>
+    <div class="tr-nav__links">
+      <a href="/#produkte">Produkte</a>
+      <a href="/so-funktioniert-nfc">So funktioniert NFC</a>
+      <a href="/business">Für Unternehmen</a>
+      <a href="/checkout" class="tr-btn tr-btn--primary" style="padding:.45rem 1rem">Warenkorb <span data-cart-count class="tr-badge" style="background:var(--tr-text);color:#fff;display:none">0</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="tr-section" style="text-align:center;overflow:hidden">
+  <div class="tr-container">
+    <p class="tr-eyebrow tr-reveal">TapReview Business</p>
+    <h1 class="tr-display tr-reveal" data-delay="1" style="max-width:16ch;margin-inline:auto">Bewertungen.<br>Für jeden Standort.</h1>
+    <p class="tr-lead tr-reveal tr-narrow" data-delay="2" style="margin-top:1rem">
+      Ob Restaurantkette, Salon-Gruppe oder Filialnetz: TapReview liefert in Menge, mit deinem Branding und auf Rechnung.
+    </p>
+    <div class="tr-reveal" data-delay="3" style="margin-top:2rem;display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap">
+      <a href="#angebot" class="tr-btn tr-btn--primary">Offerte anfragen</a>
+      <a href="#mengen" class="tr-btn tr-btn--ghost tr-link-arrow">Mengenpreise</a>
+    </div>
+  </div>
+</header>
+
+<!-- Vorteile -->
+<section class="tr-section" style="background:var(--tr-bg-soft)">
+  <div class="tr-container">
+    <div class="grid gap-6" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
+      <div class="tr-card tr-reveal" style="padding:2rem">
+        <div style="width:48px;height:48px;border-radius:14px;background:var(--tr-mint);display:grid;place-items:center;color:#22400f">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><circle cx="16" cy="15" r="2.5"/><path d="M12 4 5 20"/></svg>
+        </div>
+        <h3 class="tr-h3" style="margin:.9rem 0 .4rem">Eigenes Branding</h3><p style="color:var(--tr-text-2)">Dein Logo, deine Farben, dein Slogan – lasergraviert oder im Vollfarbdruck.</p></div>
+      <div class="tr-card tr-reveal" data-delay="1" style="padding:2rem">
+        <div style="width:48px;height:48px;border-radius:14px;background:var(--tr-mint);display:grid;place-items:center;color:#22400f">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><rect x="8" y="11" width="3" height="6"/><rect x="14" y="7" width="3" height="10"/></svg>
+        </div>
+        <h3 class="tr-h3" style="margin:.9rem 0 .4rem">Filial-Dashboard</h3><p style="color:var(--tr-text-2)">Verwalte alle Standorte zentral und ändere Bewertungslinks pro Filiale.</p></div>
+      <div class="tr-card tr-reveal" data-delay="2" style="padding:2rem">
+        <div style="width:48px;height:48px;border-radius:14px;background:var(--tr-mint);display:grid;place-items:center;color:#22400f">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l3 3v15l-2.5-1.5L13 21l-2.5-1.5L8 21l-2-1.5V3z"/><path d="M9 8h6M9 12h6"/></svg>
+        </div>
+        <h3 class="tr-h3" style="margin:.9rem 0 .4rem">Kauf auf Rechnung</h3><p style="color:var(--tr-text-2)">Bequeme Abrechnung für Firmen, inkl. Sammelbestellung und QR-Rechnung.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Mengenpreise -->
+<section id="mengen" class="tr-section">
+  <div class="tr-container">
+    <div class="tr-reveal" style="text-align:center;margin-bottom:2.5rem">
+      <h2 class="tr-h2">Staffelpreise</h2>
+      <p class="tr-lead" style="margin-top:.5rem">Je mehr Karten, desto günstiger pro Stück. Gilt für jede ReviewKarte.</p>
+    </div>
+    <div class="grid gap-6" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))">
+      <div class="tr-card tr-reveal" style="padding:2rem;text-align:center"><div class="tr-h2" style="margin:0 0 .5rem">1 Stück</div><p style="font-size:1.5rem;font-weight:700;font-family:var(--tr-font-display)">CHF 42.–</p><p style="color:var(--tr-text-2);font-size:.9rem">CHF 42.– / Stück</p></div>
+      <div class="tr-card tr-reveal" data-delay="1" style="padding:2rem;text-align:center"><div class="tr-h2" style="margin:0 0 .5rem">2 Stück</div><p style="font-size:1.5rem;font-weight:700;font-family:var(--tr-font-display)">CHF 75.–</p><p style="color:var(--tr-text-2);font-size:.9rem">CHF 37.50 / Stück</p></div>
+      <div class="tr-card tr-reveal" data-delay="2" style="padding:2rem;text-align:center;border:2px solid var(--tr-green-deep)"><p class="tr-badge">Beliebt</p><div class="tr-h2" style="margin:.5rem 0 .5rem">5 Stück</div><p style="font-size:1.5rem;font-weight:700;font-family:var(--tr-font-display)">CHF 160.–</p><p style="color:var(--tr-text-2);font-size:.9rem">CHF 32.– / Stück</p></div>
+      <div class="tr-card tr-reveal" data-delay="3" style="padding:2rem;text-align:center"><div class="tr-h2" style="margin:0 0 .5rem">10 Stück</div><p style="font-size:1.5rem;font-weight:700;font-family:var(--tr-font-display)">CHF 290.–</p><p style="color:var(--tr-text-2);font-size:.9rem">CHF 29.– / Stück</p></div>
+    </div>
+    <p class="tr-reveal" style="text-align:center;color:var(--tr-text-2);margin-top:1.5rem;font-size:.9rem">Grössere Mengen (ab 25 Stück)? <a href="#angebot">Frag eine Offerte an.</a></p>
+  </div>
+</section>
+
+<!-- Full-Width-Bild Sektion -->
+<section class="tr-dark tr-section" style="text-align:center">
+  <div class="tr-container">
+    <p class="tr-eyebrow tr-reveal">Branche egal</p>
+    <h2 class="tr-h1 tr-reveal" data-delay="1" style="max-width:20ch;margin-inline:auto">Gastronomie, Beauty, Retail, Hotellerie – überall mehr Sterne.</h2>
+    <div class="tr-reveal" data-delay="2" style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:2rem;color:var(--tr-text-invert-2)">
+      <span class="tr-badge" style="background:rgba(255,255,255,.12);color:#fff">Restaurants</span>
+      <span class="tr-badge" style="background:rgba(255,255,255,.12);color:#fff">Salons</span>
+      <span class="tr-badge" style="background:rgba(255,255,255,.12);color:#fff">Läden</span>
+      <span class="tr-badge" style="background:rgba(255,255,255,.12);color:#fff">Hotels</span>
+      <span class="tr-badge" style="background:rgba(255,255,255,.12);color:#fff">Mobile Dienste</span>
+    </div>
+  </div>
+</section>
+
+<!-- Anfrage-Formular -->
+<section id="angebot" class="tr-section" style="background:var(--tr-bg-soft)">
+  <div class="tr-container tr-narrow">
+    <div class="tr-reveal" style="text-align:center;margin-bottom:2rem">
+      <h2 class="tr-h2">Unverbindliche Offerte anfragen</h2>
+      <p class="tr-lead" style="margin-top:.5rem">Wir melden uns innerhalb eines Werktags mit einem Angebot.</p>
+    </div>
+    <form class="tr-card tr-reveal" style="padding:2rem;display:grid;gap:1rem"
+          onsubmit="event.preventDefault();this.querySelector('#ok').style.display='block';this.reset();">
+      <div class="grid gap-4" style="grid-template-columns:1fr 1fr">
+        <label style="display:grid;gap:.35rem"><span style="font-size:.85rem;color:var(--tr-text-2)">Firma</span><input required style="padding:.7rem;border:1px solid var(--tr-line);border-radius:12px;font:inherit"></label>
+        <label style="display:grid;gap:.35rem"><span style="font-size:.85rem;color:var(--tr-text-2)">Ansprechperson</span><input required style="padding:.7rem;border:1px solid var(--tr-line);border-radius:12px;font:inherit"></label>
+      </div>
+      <label style="display:grid;gap:.35rem"><span style="font-size:.85rem;color:var(--tr-text-2)">E-Mail</span><input type="email" required style="padding:.7rem;border:1px solid var(--tr-line);border-radius:12px;font:inherit"></label>
+      <div class="grid gap-4" style="grid-template-columns:1fr 1fr">
+        <label style="display:grid;gap:.35rem"><span style="font-size:.85rem;color:var(--tr-text-2)">Anzahl Standorte</span><input type="number" min="1" value="1" style="padding:.7rem;border:1px solid var(--tr-line);border-radius:12px;font:inherit"></label>
+        <label style="display:grid;gap:.35rem"><span style="font-size:.85rem;color:var(--tr-text-2)">Gewünschte Menge</span><input type="number" min="25" value="100" style="padding:.7rem;border:1px solid var(--tr-line);border-radius:12px;font:inherit"></label>
+      </div>
+      <label style="display:grid;gap:.35rem"><span style="font-size:.85rem;color:var(--tr-text-2)">Nachricht (optional)</span><textarea rows="3" style="padding:.7rem;border:1px solid var(--tr-line);border-radius:12px;font:inherit"></textarea></label>
+      <button class="tr-btn tr-btn--primary" type="submit" style="justify-self:start">Offerte anfragen</button>
+      <p id="ok" style="display:none;color:var(--tr-success)">✓ Danke! Wir melden uns in Kürze. (Demo – noch nicht mit einem Backend verbunden.)</p>
+    </form>
+  </div>
+</section>
+
+<footer class="tr-footer" style="padding-block:2.5rem">
+  <div class="tr-container"><p>© <span data-year>2026</span> TapReview · <a href="/">Startseite</a> · <a href="/impressum">Impressum</a></p></div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TapReview – Mehr Google-Bewertungen mit einem Tap | NFC-Reviewkarten</title>
+<meta name="description" content="TapReview bringt Kunden mit einem Tap direkt auf deine Bewertungsseite. NFC-Reviewkarten für Restaurants, Salons und Läden in der Schweiz. Keine App, keine Hürde – einfach antippen und bewerten.">
+<meta name="keywords" content="Reviewkarte, NFC Karte, Google Bewertungen, mehr Rezensionen, Schweiz">
+<link rel="canonical" href="https://www.nfctech.ch/">
+<meta property="og:title" content="TapReview – Mehr Bewertungen mit einem Tap">
+<meta property="og:description" content="NFC-Reviewkarten & Sticker, die Kunden direkt zur Bewertung führen.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/tapreview.css">
+<style id="tw-style">
+  #tw-caret { display:inline-block; margin-left:1px; color:var(--tr-green-deep); font-weight:400; animation:tw-blink 1s steps(1) infinite; }
+  @keyframes tw-blink { 50% { opacity:0; } }
+  @media (prefers-reduced-motion: reduce) { #tw-caret { animation:none; } }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "TapReview",
+  "url": "https://www.nfctech.ch/",
+  "description": "NFC-Reviewkarten und Sticker, die Kunden mit einem Tap zur Bewertung führen.",
+  "areaServed": "CH"
+}
+</script>
+</head>
+<body>
+
+<!-- ===== Navigation ===== -->
+<nav class="tr-nav" data-nav>
+  <div class="tr-nav__inner">
+    <a href="/" class="tr-nav__brand">NFC-Tech</a>
+    <button class="tr-nav__toggle" data-nav-toggle aria-label="Menü" aria-expanded="false">☰</button>
+    <div class="tr-nav__links">
+      <a href="/#produkte">Produkte</a>
+      <a href="/so-funktioniert-nfc">So funktioniert NFC</a>
+      <a href="/business">Für Unternehmen</a>
+      <a href="/checkout" class="tr-btn tr-btn--primary" style="padding:.45rem 1rem">
+        Warenkorb <span data-cart-count class="tr-badge" style="background:var(--tr-text);color:#fff;display:none">0</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="tr-section" style="padding-top:clamp(3rem,7vw,6rem);text-align:center;overflow:hidden">
+  <div class="tr-container">
+    <p class="tr-eyebrow tr-reveal">Tap. Bewerten. Wachsen.</p>
+    <h1 class="tr-display tr-reveal" data-delay="1" style="max-width:15ch;margin-inline:auto">
+      Mehr Bewertungen.<br>Ein <span class="tr-mark">Tap</span> genügt.
+    </h1>
+    <p class="tr-reveal" data-delay="2" style="margin-top:.9rem;font-family:var(--tr-font-display);font-weight:600;font-size:clamp(1.15rem,1.2vw + 1rem,1.6rem)">
+      <span style="color:var(--tr-text-2)">Bewertungen sammeln —</span>
+      <span id="tw-text" style="color:var(--tr-green-deep)"></span><span id="tw-caret">|</span>
+    </p>
+    <p class="tr-lead tr-reveal tr-narrow" data-delay="2" style="margin-top:1.25rem;font-family:var(--tr-font-display)">
+      Deine Kunden halten ihr Smartphone an die Karte – und landen direkt auf deiner Google-Bewertungsseite.
+      Keine App, kein Suchen, keine Hürde.
+    </p>
+    <div class="tr-reveal" data-delay="3" style="margin-top:2rem;display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap">
+      <a href="/#produkte" class="tr-btn tr-btn--primary">Produkte ansehen</a>
+      <a href="#demo" class="tr-btn tr-btn--ghost tr-link-arrow">Live-Demo</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Live-Demo (direkt unter Hero) ===== -->
+<section id="demo" class="tr-section" style="padding-top:0">
+  <div class="tr-container">
+    <div class="tr-reveal" style="text-align:center;margin-bottom:1.5rem">
+      <p class="tr-eyebrow">Live-Demo</p>
+      <h2 class="tr-h2" style="max-width:20ch;margin-inline:auto">Sieh, wie ein Tap funktioniert.</h2>
+      <p class="tr-lead tr-narrow" style="margin-top:.6rem">Drück auf «Tap starten» – das Handy berührt die Karte und die Bewertung erscheint.</p>
+    </div>
+
+    <div class="tr-card tr-reveal" style="padding:clamp(1.5rem,5vw,3.5rem);background:radial-gradient(120% 120% at 50% 0%,#ffffff,#eef2e4)">
+      <div class="demo-stage">
+
+        <!-- Karte -->
+        <div class="demo-cardwrap">
+          <img src="assets/products/bamboo-shield.png" alt="TapReview Bambus ReviewKarte"
+               style="max-width:210px;width:100%;filter:drop-shadow(0 24px 30px rgba(0,0,0,.28))">
+          <div class="tr-tap-waves" style="--tr-accent:#3f6212"><span></span><span></span><span></span></div>
+        </div>
+
+        <!-- Handy (fährt zur Karte) -->
+        <div class="demo-phone-shell">
+          <div class="tr-phone" id="demoPhone">
+            <div class="tr-phone__notch"></div>
+            <div class="tr-phone__screen" style="position:relative">
+
+              <div class="screen-state active" id="state0" style="background:linear-gradient(160deg,#1c2a12,#3f6212);color:#fff;align-items:center;justify-content:center;text-align:center;padding:1rem">
+                <div style="font-size:2.4rem">📱</div>
+                <p style="margin-top:.6rem;opacity:.9;font-size:.85rem">Sperrbildschirm</p>
+              </div>
+
+              <div class="screen-state" id="state1" style="background:#16170f;color:#fff;align-items:center;justify-content:center;text-align:center;padding:1rem">
+                <div class="tr-tap-waves" style="--tr-accent:#c4f135;width:80px;height:80px">
+                  <span></span><span></span>
+                  <div style="position:absolute;inset:0;display:grid;place-items:center;font-size:1.4rem">🔗</div>
+                </div>
+                <p style="margin-top:1rem;font-size:.85rem">NFC erkannt</p>
+                <small style="opacity:.7">nfctech.ch/r/dein-betrieb</small>
+              </div>
+
+              <div class="screen-state" id="state2" style="background:#fff">
+                <div style="background:var(--tr-bg-soft);padding:2rem .8rem .5rem;text-align:center">
+                  <div style="width:38px;height:38px;border-radius:11px;background:var(--tr-accent);margin:0 auto;display:grid;place-items:center;color:var(--tr-text);font-weight:700;font-size:.9rem">T</div>
+                  <p style="margin:.35rem 0 0;font-weight:600;font-size:.9rem">Dein Betrieb</p>
+                  <small style="color:var(--tr-text-2);font-size:.7rem">Bewertung auf Google</small>
+                </div>
+                <div style="padding:.7rem .8rem .8rem;text-align:center">
+                  <p style="font-size:.72rem;color:var(--tr-text-2);margin:.1rem 0 .45rem">Wie war dein Besuch?</p>
+                  <div id="starRow" style="display:flex;justify-content:center;gap:.15rem">
+                    <span class="demo-star" data-v="1">★</span><span class="demo-star" data-v="2">★</span>
+                    <span class="demo-star" data-v="3">★</span><span class="demo-star" data-v="4">★</span>
+                    <span class="demo-star" data-v="5">★</span>
+                  </div>
+                  <textarea id="demoText" rows="2" placeholder="Ein paar Worte…"
+                    style="width:100%;border:1px solid var(--tr-line);border-radius:10px;padding:.4rem .5rem;margin:.55rem 0 .5rem;font:inherit;font-size:.72rem;resize:none;box-sizing:border-box"></textarea>
+                  <button id="sendBtn" class="tr-btn tr-btn--primary" style="width:100%;font-size:.78rem;padding:.5rem">Bewertung absenden</button>
+                </div>
+              </div>
+
+              <div class="screen-state" id="state3" style="background:#fff;align-items:center;justify-content:center;text-align:center;padding:1.5rem">
+                <div style="width:64px;height:64px;border-radius:50%;background:var(--tr-success);display:grid;place-items:center;color:#fff;font-size:2rem">✓</div>
+                <p style="font-weight:600;margin:1rem 0 .25rem">Danke!</p>
+                <p style="font-size:.82rem;color:var(--tr-text-2)">Deine Bewertung wurde veröffentlicht.</p>
+                <p id="demoEcho" style="font-size:.78rem;color:var(--tr-text);font-style:italic;margin-top:.6rem"></p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p id="demoHint" style="text-align:center;color:var(--tr-text-2);margin-top:1.75rem">Bereit für den Tap.</p>
+      <div style="text-align:center;margin-top:1rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        <button id="tapBtn" class="tr-btn tr-btn--primary">Tap starten</button>
+        <button id="resetBtn" class="tr-btn tr-btn--ghost" style="display:none">↻ Neu starten</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Value Props ===== -->
+<section class="tr-section" style="background:var(--tr-bg-soft)">
+  <div class="tr-container">
+    <div class="tr-narrow tr-reveal" style="text-align:center;margin-bottom:3rem">
+      <h2 class="tr-h2">Warum Betriebe TapReview lieben</h2>
+      <p class="tr-lead" style="margin-top:.75rem">Drei Gründe, warum aus zufriedenen Gästen sichtbare Bewertungen werden.</p>
+    </div>
+    <div class="grid gap-6" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))">
+      <div class="tr-card tr-reveal" style="padding:2rem">
+        <div style="width:48px;height:48px;border-radius:14px;background:var(--tr-mint);display:grid;place-items:center;color:#22400f">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        </div>
+        <h3 class="tr-h3" style="margin:.9rem 0 .5rem">Sofort startklar</h3>
+        <p style="color:var(--tr-text-2)">Vorprogrammiert mit deinem Bewertungslink. Auspacken, hinstellen, fertig – ohne Technikwissen.</p>
+      </div>
+      <div class="tr-card tr-reveal" data-delay="1" style="padding:2rem">
+        <div style="width:48px;height:48px;border-radius:14px;background:var(--tr-mint);display:grid;place-items:center;color:#22400f">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 7-7"/><path d="M18 8h3v3"/></svg>
+        </div>
+        <h3 class="tr-h3" style="margin:.9rem 0 .5rem">Messbar mehr Sterne</h3>
+        <p style="color:var(--tr-text-2)">Niedrige Hürde heisst mehr Rezensionen. Mehr Rezensionen heissen mehr Sichtbarkeit und Vertrauen.</p>
+      </div>
+      <div class="tr-card tr-reveal" data-delay="2" style="padding:2rem">
+        <div style="width:48px;height:48px;border-radius:14px;background:var(--tr-mint);display:grid;place-items:center;color:#22400f">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14-4M4 5v4h4"/><path d="M4 13a8 8 0 0 0 14 4m2-4v4h-4"/></svg>
+        </div>
+        <h3 class="tr-h3" style="margin:.9rem 0 .5rem">Frei umprogrammierbar</h3>
+        <p style="color:var(--tr-text-2)">Ziel geändert? Kein Problem. Verlinke jederzeit neu – Google, TripAdvisor, deine Website oder Social Media.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Produkte: Reviewkarten ===== -->
+<section id="produkte" class="tr-section">
+  <div class="tr-container">
+    <div class="tr-reveal" style="margin-bottom:2.5rem">
+      <p class="tr-eyebrow">Produkte</p>
+      <h2 class="tr-h2">Wähle dein ReviewShield.</h2>
+      <p class="tr-lead" style="margin-top:.5rem;max-width:52ch">In Weiss oder Schwarz, aus echtem Bambusholz oder als selbstklebender Sticker – jedes mit integriertem NFC-Chip.</p>
+    </div>
+    <div class="tr-product-grid" data-grid="reviewkarte"></div>
+  </div>
+</section>
+
+<!-- ===== Full-Width Dark Section ===== -->
+<section class="tr-dark tr-section" style="text-align:center;overflow:hidden">
+  <div class="tr-container">
+    <p class="tr-eyebrow tr-reveal">Tap to Review</p>
+    <h2 class="tr-h1 tr-reveal" data-delay="1" style="max-width:18ch;margin-inline:auto">
+      Halt das Handy dran. Den Rest macht der Chip.
+    </h2>
+    <p class="tr-lead tr-reveal tr-narrow" data-delay="2" style="margin-top:1rem">
+      Im NFC-Chip steckt dein Bewertungslink. Beim Tap öffnet sich die Seite automatisch im Browser –
+      auf iPhone und Android, ganz ohne Installation.
+    </p>
+    <div class="tr-reveal" data-delay="3" style="margin-top:2.5rem;display:flex;justify-content:center">
+      <div class="tr-tap-waves" style="--tr-accent:#c4f135">
+        <span></span><span></span><span></span>
+        <div style="position:absolute;inset:0;display:grid;place-items:center;font-size:2.2rem">📱</div>
+      </div>
+    </div>
+    <div class="tr-reveal" data-delay="3" style="margin-top:2.5rem">
+      <a href="/so-funktioniert-nfc" class="tr-btn tr-btn--light">Wie NFC funktioniert ›</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== So funktioniert's (3 Schritte) ===== -->
+<section class="tr-section">
+  <div class="tr-container">
+    <div class="tr-narrow tr-reveal" style="text-align:center;margin-bottom:3rem">
+      <h2 class="tr-h2">In drei Schritten zu mehr Bewertungen</h2>
+    </div>
+    <div class="grid gap-8" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
+      <div class="tr-reveal">
+        <div class="tr-h1 tr-gradient-text">1</div>
+        <h3 class="tr-h3" style="margin:.5rem 0">Karte platzieren</h3>
+        <p style="color:var(--tr-text-2)">Stell die ReviewKarte auf den Tresen, den Tisch oder an den Empfang.</p>
+      </div>
+      <div class="tr-reveal" data-delay="1">
+        <div class="tr-h1 tr-gradient-text">2</div>
+        <h3 class="tr-h3" style="margin:.5rem 0">Gast tippt an</h3>
+        <p style="color:var(--tr-text-2)">Der Gast hält sein Smartphone an die Karte – die Bewertungsseite öffnet sich sofort.</p>
+      </div>
+      <div class="tr-reveal" data-delay="2">
+        <div class="tr-h1 tr-gradient-text">3</div>
+        <h3 class="tr-h3" style="margin:.5rem 0">Sterne sammeln</h3>
+        <p style="color:var(--tr-text-2)">Mehr Bewertungen, bessere Platzierung, mehr neue Kunden. Ganz automatisch.</p>
+      </div>
+    </div>
+    <div class="tr-reveal" style="text-align:center;margin-top:2.5rem">
+      <a href="#demo" class="tr-btn tr-btn--primary">Demo ausprobieren</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Business CTA ===== -->
+<section class="tr-section">
+  <div class="tr-container">
+    <div class="tr-card tr-reveal" style="padding:clamp(2rem,5vw,4rem);text-align:center;background:linear-gradient(135deg,#16170f,#3f6212);color:#fff">
+      <p class="tr-eyebrow" style="color:var(--tr-accent)">Für Unternehmen</p>
+      <h2 class="tr-h2" style="max-width:22ch;margin-inline:auto;color:#fff">Mehrere Filialen? Eigenes Branding? Wir liefern in Menge.</h2>
+      <p class="tr-lead" style="color:#dfe6d2;margin-top:1rem;max-width:55ch;margin-inline:auto">
+        Individuelles Logo, Mengenrabatte ab 25 Stück und ein Dashboard für alle Standorte.
+      </p>
+      <div style="margin-top:2rem">
+        <a href="/business" class="tr-btn tr-btn--light">Business-Angebot entdecken</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="tr-footer tr-section" style="padding-block:3.5rem">
+  <div class="tr-container">
+    <div class="tr-footer__cols">
+      <div>
+        <a href="/" class="tr-nav__brand" style="color:var(--tr-text)">NFC-Tech</a>
+        <p style="margin-top:.75rem;max-width:28ch">Mehr Bewertungen mit einem Tap. Hergestellt &amp; versendet in der Schweiz.</p>
+      </div>
+      <div><h4>Produkte</h4><ul>
+        <li><a href="/produkt?id=plexi-weiss">ReviewShield Weiss</a></li>
+        <li><a href="/produkt?id=bamboo">Bambus</a></li>
+      </ul></div>
+      <div><h4>Erfahren</h4><ul>
+        <li><a href="/so-funktioniert-nfc">So funktioniert NFC</a></li>
+        <li><a href="/#demo">Live-Demo</a></li>
+        <li><a href="/business">Für Unternehmen</a></li>
+      </ul></div>
+      <div><h4>Rechtliches</h4><ul>
+        <li><a href="/impressum">Impressum</a></li>
+        <li><a href="/datenschutz">Datenschutz</a></li>
+        <li><a href="/agb">AGB</a></li>
+      </ul></div>
+    </div>
+    <hr style="border:0;border-top:1px solid var(--tr-line);margin:2.5rem 0 1.25rem">
+    <p>© <span data-year>2026</span> TapReview · ein Angebot von Rasouli IT Solutions. Eigenständige Marke – nicht mit Google oder anderen Plattformen verbunden.</p>
+  </div>
+</footer>
+
+<script src="js/products-data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  TapReview.renderProductGrid('[data-grid="reviewkarte"]');
+
+  // ----- Live-Demo unter dem Hero (Handy fährt zur Karte) -----
+  (function () {
+    const phone   = document.getElementById('demoPhone');
+    const cardwrap = document.querySelector('.demo-cardwrap');
+    const hint    = document.getElementById('demoHint');
+    const tapBtn  = document.getElementById('tapBtn');
+    const reset   = document.getElementById('resetBtn');
+    const states  = ['state0','state1','state2','state3'].map(id => document.getElementById(id));
+    if (!phone) return;
+    let chosen = 0, running = false;
+
+    function show(i){ states.forEach((s,n)=>s && s.classList.toggle('active', n===i)); }
+
+    function runTap(){
+      if (running) return;
+      running = true;
+      tapBtn.disabled = true; tapBtn.style.opacity = .5;
+      hint.textContent = 'Handy nähert sich der Karte…';
+      phone.classList.add('is-tapping');
+      // Moment der Berührung (Handy ist klein an der Karte)
+      setTimeout(function(){ cardwrap.classList.add('contact'); show(1); hint.textContent = 'NFC erkannt – Link wird geöffnet…'; }, 1100);
+      // Handy wieder bei Originalgrösse → Bewertungsseite
+      setTimeout(function(){
+        phone.classList.remove('is-tapping');
+        cardwrap.classList.remove('contact');
+        show(2); hint.textContent = 'Vergib jetzt deine Bewertung 👇';
+        reset.style.display = 'inline-flex';
+        running = false;
+      }, 2200);
+    }
+
+    tapBtn.addEventListener('click', runTap);
+
+    document.querySelectorAll('.demo-star').forEach(function(star){
+      star.addEventListener('click', function(){
+        chosen = +star.dataset.v;
+        document.querySelectorAll('.demo-star').forEach(function(s){ s.classList.toggle('lit', +s.dataset.v <= chosen); });
+      });
+    });
+    document.getElementById('sendBtn').addEventListener('click', function(){
+      if(!chosen){ document.querySelectorAll('.demo-star').forEach(function(s){ s.classList.add('lit'); }); chosen=5; }
+      const txtEl = document.getElementById('demoText');
+      const echo = document.getElementById('demoEcho');
+      const txt = txtEl ? txtEl.value.trim() : '';
+      if (echo) echo.textContent = txt ? '„' + txt + '“' : '';
+      show(3); hint.textContent = 'Fertig – danke für die Bewertung! 🎉';
+    });
+    reset.addEventListener('click', function(){
+      chosen = 0;
+      document.querySelectorAll('.demo-star').forEach(function(s){ s.classList.remove('lit'); });
+      const txtEl = document.getElementById('demoText'); if (txtEl) txtEl.value = '';
+      show(0); hint.textContent = 'Bereit für den Tap.';
+      reset.style.display = 'none';
+      tapBtn.disabled = false; tapBtn.style.opacity = 1;
+    });
+  })();
+</script>
+<script>
+/* Typewriter im Hero – Wörter unten anpassbar */
+(function () {
+  const WORDS = ["schnell", "modern", "sauber"];   // <- hier Wörter ändern
+  const TYPE = 90, ERASE = 55, HOLD = 1200, PAUSE = 300;
+  const el = document.getElementById("tw-text");
+  if (!el) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = WORDS[0]; return;
+  }
+  let w = 0, i = 0, deleting = false;
+  function tick() {
+    const word = WORDS[w];
+    el.textContent = word.slice(0, i);
+    if (!deleting && i < word.length) { i++; return setTimeout(tick, TYPE); }
+    if (!deleting && i === word.length) { deleting = true; return setTimeout(tick, HOLD); }
+    if (deleting && i > 0) { i--; return setTimeout(tick, ERASE); }
+    deleting = false; w = (w + 1) % WORDS.length;
+    setTimeout(tick, PAUSE);
+  }
+  tick();
+})();
+</script>
+</body>
+</html>
